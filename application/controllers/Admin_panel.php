@@ -499,58 +499,36 @@ class Admin_Panel extends CI_Controller {
 			redirect(base_url('admin_panel/qlmgg'));
 		}
 	}
-	// Export data to Excel Files
-	public function export_member() {
-		// Delete all file
-		$files = glob('res/exports/*'); 
-		foreach($files as $file){
-			if(is_file($file))
-				unlink($file);
+    public function export_member(){ 
+		$filename = 'thanhvien-'.date('Ymd').'.csv'; 
+		header("Content-Description: File Transfer"); 
+		header("Content-Disposition: attachment; filename=$filename"); 
+		header("Content-Type: application/csv; ");
+		echo "\xEF\xBB\xBF"; // UTF-8 BOM
+		$model = new M_Admin();
+		$usersData = $model->employeeList();
+		$file = fopen('php://output','w');
+		$header = array(
+			"ID User",
+			"Email User",
+			"Name User",
+			"Job User",
+			"Gender User",
+			"About User",
+			"Permission User",
+			"Code User",
+			"Coin User",
+			"Avatar User",
+			"Created Date",
+			"Login Date",
+		); 
+		fputcsv($file, $header);
+		foreach ($usersData as $key=>$line){ 
+			fputcsv($file,$line); 
 		}
-		// Create file name
-        $fileName = 'thanhvien-'.date('d-m-Y').'.xlsx';  
-		// Load excel library
-        $this->load->library('excel');
-        $model = new M_Admin();
-        $empInfo = $model->employeeList();
-        $objPHPExcel = new PHPExcel();
-        $objPHPExcel->setActiveSheetIndex(0);
-        // Set Header
-        $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'ID User');
-        $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Email User');
-        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Pass User');
-        $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Name User');
-        $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Job User');
-        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Sex User');
-        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'About User');
-        $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Permission User');
-        $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Code User');
-        $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Coin User');
-        $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Avatar User');
-        $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Created Date');
-        // Set Row
-        $rowCount = 2;
-        foreach ($empInfo as $element) {
-            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['id_user']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['email_user']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['pass_user']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['name_user']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['job_user']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['sex_user']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['about_user']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['permission_user']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['code_user']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['coin_user']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['avatar_user']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['created_date']);
-            $rowCount++;
-        }
-        $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
-        $objWriter->save("res/exports/".$fileName);
-		// Download file
-        header("Content-Type: application/vnd.ms-excel");
-        redirect("../res/exports/".$fileName);     
-    }
+		fclose($file); 
+		exit; 
+	}
     private function sendMail($email, $subject, $message)
 	{
 		$config = Array(

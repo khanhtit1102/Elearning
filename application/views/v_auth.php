@@ -17,10 +17,10 @@ class V_Auth
 	}
 	public function add_money()
 	{
-		include "res/add_money.php";
+		include "res/courses/add_money.php";
 	}
 	public function reset_pass()
 	{
-		include "res/reset_pass.php";
+		include "res/courses/reset_pass.php";
 	}
 }

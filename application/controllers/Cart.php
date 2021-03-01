@@ -22,7 +22,7 @@ class Cart extends CI_Controller {
 		//Kiểm tra số lượng giỏ hàng
 		$count = $model->count();
 		if ($count == 0) {
-			$this->session->set_flashdata('error', 'Chưa có khóa nào trong giỏ hàng! <a href="courses">Mua thêm khóa học</a>');
+			$this->session->set_flashdata('error', 'Chưa có khóa nào trong giỏ hàng! <a href="courses" class="text-primary">Mua thêm khóa học</a>');
 		}
 
 		if ($this->input->get('delete')) {
@@ -32,7 +32,7 @@ class Cart extends CI_Controller {
 		}
 		if ($this->input->post('action') == 'buy') {
 			if ($this->session->userdata['tien_thua'] < 0) {
-			$this->session->set_flashdata('error', 'Bạn không đủ tiền! Vui lòng <a href="'.base_url("auth/money").'"">nạp thêm tiền</a> để mua khóa học.');
+			$this->session->set_flashdata('error', 'Bạn không đủ tiền! Vui lòng <a href="'.base_url("auth/money").'"" class="text-primary">nạp thêm tiền</a> để mua khóa học.');
 			}
 			else{
 				if ($this->input->post('code_cp')) {
@@ -42,7 +42,7 @@ class Cart extends CI_Controller {
 					$code_cp = 'null';
 				}
 				$model->buy_all_cart($code_cp);
-				$this->session->set_flashdata('error', 'Mua thành công! <a href="auth">Vào học</a> thôi nào!');
+				$this->session->set_flashdata('error', 'Mua thành công! <a href="auth" class="text-primary">Vào học</a> thôi nào!');
 			}
 		}
 		if ($this->input->post('action') == 'cancel') {

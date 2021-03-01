@@ -80,9 +80,9 @@
 					</div>
 				</div>
 			</div>
-			<a href="<?php echo base_url('teacher_panel/qltv') ?>">
+			<a href="<?php echo base_url('teacher_panel/payment') ?>">
 				<div class="panel-footer">
-					<span class="pull-left">Xem chi tiết</span>
+					<span class="pull-left">Yêu cầu thanh toán</span>
 					<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 					<div class="clearfix"></div>
 				</div>

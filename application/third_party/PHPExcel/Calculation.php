@@ -2189,7 +2189,7 @@ class PHPExcel_Calculation {
      */
     public static function _unwrapResult($value) {
         if (is_string($value)) {
-            if ((isset($value{0})) && ($value{0} == '"') && (substr($value, -1) == '"')) {
+            if ((isset($value[0])) && ($value[0] == '"') && (substr($value, -1) == '"')) {
                 return substr($value, 1, -1);
             }
             //	Convert numeric errors to NaN error
@@ -2300,10 +2300,10 @@ class PHPExcel_Calculation {
         //	Basic validation that this is indeed a formula
         //	We return an empty array if not
         $formula = trim($formula);
-        if ((!isset($formula{0})) || ($formula{0} != '='))
+        if ((!isset($formula[0])) || ($formula[0] != '='))
             return array();
         $formula = ltrim(substr($formula, 1));
-        if (!isset($formula{0}))
+        if (!isset($formula[0]))
             return array();
 
         //	Parse the formula and return the token stack
@@ -2382,10 +2382,10 @@ class PHPExcel_Calculation {
         //	Basic validation that this is indeed a formula
         //	We simply return the cell value if not
         $formula = trim($formula);
-        if ($formula{0} != '=')
+        if ($formula[0] != '=')
             return self::_wrapResult($formula);
         $formula = ltrim(substr($formula, 1));
-        if (!isset($formula{0}))
+        if (!isset($formula[0]))
             return self::_wrapResult($formula);
 
         $pCellParent = ($pCell !== NULL) ? $pCell->getWorksheet() : NULL;

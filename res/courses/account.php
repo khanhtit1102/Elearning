@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Courses | Education</title>
+    <title>Tài khoản | Education</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -186,29 +186,28 @@
                     </div>
                     </div>
                     <div class="tab-pane fade container" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <div class="row">
                         <?php 
                             if ($owner == null) {
                                 echo "<center><b>Bạn chưa sở hữu khóa học nào!</b><br>Vui lòng mua thêm khóa học <a href='courses' class='text-primary'>tại đây</a>!</center>";
                             }
                             else{
                                 foreach ($owner as $key => $value) { ?> 
-                                <div class="row courses-owner">
-                                    <div class="col-lg-4">
-                                        <div class="properties properties2 mb-30">
-                                            <div class="properties__card">
-                                                <div class="properties__img overlay1">
-                                                    <a href="<?php echo base_url('learn/course/').$value['id_cs']; ?>"><img src="<?php echo base_url(); ?>res/uploads/<?php echo $value['thumb_cs']; ?>" alt=""></a>
-                                                </div>
-                                                <div class="properties__caption">
-                                                    <h3><a href="<?php echo base_url('learn/course/').$value['id_cs']; ?>"><?php echo $value['ten_cs']; ?></a></h3>
-                                                </div>
+                                <div class="col-xl-4 col-lg-6 col-md-12 courses-owner">
+                                    <div class="properties properties2 mb-30">
+                                        <div class="properties__card">
+                                            <div class="properties__img overlay1">
+                                                <a href="<?php echo base_url('learn/course/').$value['id_cs']; ?>"><img src="<?php echo base_url(); ?>res/uploads/<?php echo $value['thumb_cs']; ?>" alt=""></a>
+                                            </div>
+                                            <div class="properties__caption">
+                                                <h3><a href="<?php echo base_url('learn/course/').$value['id_cs']; ?>"><?php echo $value['ten_cs']; ?></a></h3>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                         <?php   }
                             } ?> 
-                             
+                        </div>     
                     </div>
                 </div>
             <?php } ?>

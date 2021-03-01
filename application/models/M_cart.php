@@ -111,7 +111,7 @@ class M_Cart extends CI_Model
 		$this->db->where('id_user', $id);
 		$this->db->update('user');
 		$this->session->userdata['coin_user'] = $this->session->userdata['tien_thua'];
-		$this->session->unset_userdata['tien_thua'];
+		// $this->session->unset_userdata['tien_thua'];
 	}
 }
 

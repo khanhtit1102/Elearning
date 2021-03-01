@@ -260,7 +260,7 @@ class M_Admin extends CI_Model
 	}
 	// Export data to Excel Files
     public function employeeList() {
-        $this->db->select(array('e.id_user', 'e.email_user', 'e.pass_user', 'e.name_user', 'e.job_user', 'e.sex_user', 'e.	about_user', 'e.permission_user', 'e.code_user', 'e.coin_user', 'e.avatar_user', 'e.created_date',));
+        $this->db->select(array('e.id_user', 'e.email_user', 'e.name_user', 'e.job_user', 'e.sex_user', 'e.	about_user', 'e.permission_user', 'e.code_user', 'e.coin_user', 'e.avatar_user', 'e.created_date', 'e.last_login'));
         $this->db->from('user as e');
         $query = $this->db->get();
         return $query->result_array();

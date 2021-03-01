@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Tất cả khóa học | Education</title>
+    <title>Tham gia khóa học | Education</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -27,6 +27,32 @@
 </head>
 
 <body>
+    <style type="text/css">
+        .overflow {
+            overflow-y: auto;
+            height: 175px;
+        }
+        .hiencmt {
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            padding-left: 10px;
+            padding-top: 2px;
+        }
+        .hiencmt .infocmt {
+            font-weight: bold;
+            color: blue;
+        }
+        p.infocmt{
+            margin: unset;
+        }
+        p.ndcmt{
+            margin: unset;
+        }
+        li.active a b{
+            color: #17a2b8;
+        }
+    </style>
     <!-- ? Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
@@ -43,6 +69,8 @@
     <?php include "res/courses/header.php" ?>
     <!-- Header End -->
     <main>
+        <?php foreach ($course as $key => $value) {
+        ?>
         <!--? slider Area Start-->
         <section class="slider-area slider-area2">
             <div class="slider-active">
@@ -52,7 +80,8 @@
                         <div class="row">
                             <div class="col-xl-8 col-lg-11 col-md-12">
                                 <div class="hero__caption hero__caption2">
-                                    <h1 data-animation="bounceIn" data-delay="0.2s">Khoá học của chúng tôi</h1>
+                                    <h1 data-animation="bounceIn" data-delay="0.2s" style="font-size: 50px !important;"><?php echo $value['ten_cs'] ?></h1>
+                                    <h2 data-animation="bounceIn" data-delay="0.4s" class="text-white" style="font-size: 30px !important;">Giảng Viên: <?php echo $value['name_user'] ?></h2>
                                 </div>
                             </div>
                         </div>
@@ -60,103 +89,78 @@
                 </div>
             </div>
         </section>
-        <!-- Courses area start -->
-        <div class="courses-area section-padding40 fix">
+        <section class="blog_area single-post-area pt-30 pb-50">
             <div class="container">
-                <h3><?php if ($keyword != '') { echo 'Bạn đang tìm kiếm với từ khóa - '.$keyword.' -'; }?></h3>
-                <div class="form locsp">
-                    <form action="<?php echo base_url('courses'); ?>" method="POST" role="form">
-                        <div class="form-group">
-                            <label for="">Lọc Sản Phẩm:</label>
-                            <div class="form-group row">
-                                <div class="col-lg-2">
-                                    <select name="name" class="default-select">
-                                        <option value="" selected="">Theo tên</option>
-                                        <option value="ten_cs asc">A => Z</option>
-                                        <option value="ten_cs desc">Z => A</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-2">
-                                    <select name="price" class="default-select">
-                                        <option value="" selected="">Theo giá</option>
-                                        <option value="gia_cs asc">Thấp => Cao</option>
-                                        <option value="gia_cs desc">Cao => Thấp</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-2">
-                                    <button type="submit" class="genric-btn success circle" name="filter" value="filter" title="Vui lòng chỉ chọn một loại lọc">Lọc<i class="fas fa-search"></i></button>
-                                </div>
-                                <div class="col-lg-2">
-                                    <a href="<?php echo base_url('courses/cancel_search'); ?>"><button type="button" class="genric-btn warning circle">Huỷ Lọc<i class="fas fa-ban"></i></button></a>
-                                </div>
-                            </div>
-                        </div>
-                    </form><br><br><br>
-                </div>
                 <div class="row">
-                    <?php foreach($query_poster->result() as $row){  ?>
-                        <div class="col-lg-4">
-                            <div class="properties properties2 mb-30">
-                                <div class="properties__card">
-                                    <div class="properties__img overlay1">
-                                        <a href="<?php echo base_url('display?id=').$row->id_cs; ?>"><img src="<?php echo base_url(); ?>res/uploads/<?php echo $row->thumb_cs; ?>" alt=""></a>
+                    <div class="col-xl-8 col-lg-12 col-md-12">
+                        <?php foreach ($link_episode as $col => $row) { ?>
+                        <h3><?php echo 'Bài '.$row['ep_number'].': '.$row['ep_title']; ?></h3>
+                        <span class="thumbnail">
+                        <video width="" height="" controls autoplay controlsList="nodownload" style="max-width: 100%">
+                            <source src="<?php echo base_url('res/uploads/').$row['video_name']; ?>" type="video/mp4">
+                        </video>
+                    </span>
+                        <?php } ?>
+                    </div>
+                    <div class="col-xl-4 col-lg-12 col-md-12 mt-20">
+                        <div class="accordion" id="accordionExample">
+                          <div class="card">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#card" aria-expanded="true" aria-controls="card" style="width: 100%;">
+                                      Bình luận
+                                    </button>
+                                </h5>
+                            <div id="card" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                              <div class="card-body">
+                                <div class="overflow">
+                                <?php foreach ($comment as $key => $value) {
+                                    ?>
+                                    <div class="hiencmt">
+                                        <p class="infocmt">[<?php echo $value['ten_cmt'] ?> | <?php echo $value['email_cmt'] ?>]</p>
+                                        <p class="ndcmt">Nội dung: <?php echo $value['nd_cmt'] ?></p>
                                     </div>
-                                    <div class="properties__caption">
-                                        <p><?php echo $row->name_user; ?></p>
-                                        <h3><a href="<?php echo base_url('display?id=').$row->id_cs; ?>"><?php echo $row->ten_cs; ?></a></h3>
-                                        <div class="properties__footer d-flex justify-content-between align-items-center">
-                                            <div class="price">
-                                                <span><?php echo number_format($row->gia_cs); ?>đ</span>
-                                            </div>
-                                        </div>
-                                        <a href="<?php echo base_url('display?id=').$row->id_cs; ?>" class="border-btn border-btn2">Xem chi tiết</a>
-                                    </div>
+                                <?php } ?>
                                 </div>
+                                <br><br>
+                                <form action="" method="POST" role="form">
+                                    <input type="hidden" name="txtname" value="<?php echo $_SESSION['name_user'] ?>">
+                                    <input type="hidden" name="txtemail" value="<?php echo $_SESSION['email_user'] ?>">
+                                    <textarea name="txtnd" class="single-input" placeholder="Nội dung (Không quá 200 ký tự)" rows="3" maxlength="200"></textarea>
+                                    <br>
+                                    <button type="submit" class="genric-btn info-border circle" name="comment" value="submit" style="width: 100%">Bình luận</button>
+                                </form>
+                              </div>
                             </div>
-                        </div>
-                    <?php } ?>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-8">
-                        <div class="section-tittle text-center mt-40">
-                            <!-- <a href="#" class="border-btn">Load More</a> -->
-                            <?php echo $paginator; ?>
+                          </div>
+                          <div class="card">
+                              <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%;">
+                                  Lộ trình - Bài học
+                                </button>
+                              </h5>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                              <div class="card-body">
+                                <div class="overflow" style="height: 300px;">
+                                    <ul>
+                                        <?php $i=0; foreach ($all_episodes as $key => $value) { $i++;
+                                            ?>
+                                            <li class="<?php if (isset($_GET['episode'])){if ($value['ep_number'] == $_GET['episode']) { echo 'active'; }} ?>">
+                                                <a href="?episode=<?php echo $value['ep_number']; ?>">
+                                                    <b>Bài <?php echo $i.' - '.$value['ep_title']; ?></b>
+                                                </a>
+                                            </li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Courses area End -->
-        <!--? top subjects Area Start -->
-        <div class="topic-area">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-8">
-                        <div class="section-tittle text-center mb-55">
-                            <h2>Danh mục khóa học</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <?php foreach ($allcate as $row) { ?>
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="single-topic text-center mb-30">
-                                <div class="topic-img">
-                                    <img src="<?php echo base_url() ?>/res/courses/assets/img/gallery/topic<?php echo $row['stt_cate'] ?>.png" alt="">
-                                    <div class="topic-content-box">
-                                        <div class="topic-content">
-                                            <h3><a href="<?php echo base_url('courses/category/').$row['id_cate'] ?>"><?php echo $row['name_cate']; ?></a></h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    
-                </div>
-            </div>
-        </div>
-        <!-- top subjects End -->  
+        </section>
+        <?php } ?>
     </main>
     <footer>
         <div class="footer-wrappper footer-bg">
@@ -211,6 +215,22 @@
     <!-- Jquery Plugins, main Jquery -->	
     <script src="<?php echo base_url(); ?>/res/courses/assets/js/plugins.js"></script>
     <script src="<?php echo base_url(); ?>/res/courses/assets/js/main.js"></script>
-    
+    <script type="text/javascript">
+        $(function() {
+            $(this).bind("contextmenu", function(e) {
+                return false;
+            });
+            $(this).keydown(function(event) {
+                if (event.keyCode == 123 || (event.ctrlKey && event.keyCode == 85) || (event.ctrlKey && event.shiftKey && event.keyCode == 73)) {
+                    alert('Disabled');
+                    return false;
+                }
+                else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {
+                    alert('Disabled');
+                    return false;
+                }
+            });
+        });
+    </script>
 </body>
 </html>

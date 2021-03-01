@@ -5,7 +5,7 @@ class V_Cart
 {
 	public function index($result, $count, $coupon_discount)
 	{
-		include 'res/cart.php';
+		include 'res/courses/cart.php';
 	}
 	
 }

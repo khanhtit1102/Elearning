@@ -75,7 +75,7 @@ class Courses extends CI_Controller {
 		$config['prev_tag_close'] =  '';
 		$config['num_tag_open'] =  '';
 		$config['num_tag_close'] =  '';
-		$config['cur_tag_open'] =  '<a href="#" class="genric-btn primary-border circle arrow">';
+		$config['cur_tag_open'] =  '<a href="#" class="genric-btn primary-border circle arrow mr-10">';
 		$config['cur_tag_close'] =  '</a>';
 		$this->pagination->initialize($config);
 		$paginator = $this->pagination->create_links();  

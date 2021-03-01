@@ -3,7 +3,7 @@
 <head>
    <meta charset="utf-8">
    <meta http-equiv="x-ua-compatible" content="ie=edge">
-   <title>Courses | Education</title>
+   <title><?php foreach ($result as $key => $value) { echo $value["ten_cs"]; } ?> | Education</title>
    <meta name="description" content="">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>/res/courses/assets/img/favicon.ico">
@@ -140,7 +140,7 @@
          </div>
       </div>
       <div class="col-lg-4">
-         <div class="blog_right_sidebar">
+         <div class="blog_right_sidebar sticky-top" style="z-index: 0 !important;">
             <aside class="single_sidebar_widget post_category_widget">
                <h4 class="widget_title" style="color: #2d2d2d;">Giá: <?php echo number_format($value["gia_cs"]); ?>đ</h4>
                <ul class="list cat-list">
