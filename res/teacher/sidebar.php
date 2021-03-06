@@ -1,5 +1,5 @@
 <div class="nav-side-menu">
-	<div class="brand"><a href="<?php echo base_url() ?>"><img src="<?php echo base_url('res/') ?>imgs/logo.png" alt="" width="90%"></a></div>
+	<div class="brand"><a href="<?php echo base_url() ?>"><img src="<?php echo base_url('res/') ?>courses/assets/img/logo/logo.png" alt="" width="90%"></a></div>
 	<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 	<div class="menu-list">
 		<ul id="menu-content" class="menu-content collapse out">
