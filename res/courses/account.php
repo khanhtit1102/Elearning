@@ -164,9 +164,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="tab-pane fade container" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row justify-content-center">
-                        <div class="col-6 col-xl-12 col-lg-12 change-password">
+                        <div class="col col-lg-6 change-password">
                             <?php if (isset($_SESSION['error'])) {
                                 echo '<div class="alert alert-success" role="alert">'.$_SESSION['error'].'</div>';
                             } ?>

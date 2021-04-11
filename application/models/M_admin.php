@@ -78,9 +78,12 @@ class M_Admin extends CI_Model
 	}
 	public function delete_user($id)
 	{
+		$this->db->where('id_user', $id)->delete('course');
+		$this->db->where('id_user', $id)->delete('cart');
 		$this->db->where('id_user', $id)->delete('adminchat');
 		$this->db->where('id_user', $id)->delete('teacherchat');
-		$this->db->where('id_user', $id)->delete('cart');
+		$this->db->where('id_user', $id)->delete('money_history');
+		$this->db->where('id_user', $id)->delete('payment_request');
 		$this->db->where('id_user', $id)->delete('own');
 		$this->db->where('id_user', $id)->delete('user');
 	}
